@@ -170,7 +170,7 @@ class AddData : AppCompatActivity() {
             }
             val refSearchPositionByPhoneNumberDB = mFirebaseDatabaseConnection.getReference(mUserData).child("searchPositionByPhoneNumber").child(textPhoneNumber)
             refSearchPositionByPhoneNumberDB.child("Location : $textLocation | Row : $textRow | Column : $textColumn").removeValue()
-            Toast.makeText(applicationContext, "ลบข้อมูลเรียบร้อย", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "ลบข้อมูลเรียบร้อยจ้า", Toast.LENGTH_SHORT).show()
         }
     }
 }
