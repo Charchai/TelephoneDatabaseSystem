@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="program.application.mobileapp.telephonedatabasesystem">
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/logo_pabx"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/logo_pabx"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.TelephoneDatabaseSystem">
+        <activity android:name=".Register"></activity>
+        <activity android:name=".Login" />
+        <activity android:name=".AddData" />
+        <activity
+            android:name=".SearchHost"
+            android:label="@string/title_activity_search_host" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

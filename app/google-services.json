@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "487245988343",
+    "project_id": "telephonedatabasesystem",
+    "storage_bucket": "telephonedatabasesystem.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:487245988343:android:29adb33de613454248eef2",
+        "android_client_info": {
+          "package_name": "program.application.mobileapp.telephonedatabasesystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "487245988343-mu5nsplcc3f13t3nqd3fgtv3c3j4jbfl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "program.application.mobileapp.telephonedatabasesystem",
+            "certificate_hash": "1228cb26691b12a2740880a0b6dcf7b3f29f1059"
+          }
+        },
+        {
+          "client_id": "487245988343-14uns03rbhqoh56035iigsp33qcgd1le.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5D0U7jWKc9rPrgpW3A24GalCVyjVLTfc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "487245988343-14uns03rbhqoh56035iigsp33qcgd1le.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

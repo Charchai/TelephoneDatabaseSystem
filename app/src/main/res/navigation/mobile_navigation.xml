@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_number">
+
+    <fragment
+        android:id="@+id/navigation_number"
+        android:name="program.application.mobileapp.telephonedatabasesystem.number.SearchByNumber"
+        android:label="@string/text_number_menu"
+        tools:layout="@layout/search_number_fragment" />
+
+    <fragment
+        android:id="@+id/navigation_name"
+        android:name="program.application.mobileapp.telephonedatabasesystem.name.SearchByName"
+        android:label="@string/text_name_menu"
+        tools:layout="@layout/search_name_fragment" />
+
+    <fragment
+        android:id="@+id/navigation_location"
+        android:name="program.application.mobileapp.telephonedatabasesystem.location.SearchByLocation"
+        android:label="@string/text_location_menu"
+        tools:layout="@layout/search_location_fragment" />
+    <fragment
+        android:id="@+id/navigation_Spare"
+        android:name="program.application.mobileapp.telephonedatabasesystem.spare.Spare"
+        android:label="@string/text_spare_menu"
+        tools:layout="@layout/spare_fragment"/>
+</navigation>

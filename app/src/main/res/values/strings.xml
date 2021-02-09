@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">สมุดโทรศัพท์ PABX</string>
+    <string name="text_search_main">ค้นหาข้อมูล</string>
+    <string name="text_adddata_main">เพิ่มข้อมูล</string>
+    <string name="title_activity_search_host">search</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="text_spare_menu">เบอร์ว่าง</string>
+    <string name="text_number_menu">ByNumber</string>
+    <string name="text_name_menu">ByName</string>
+    <string name="text_location_menu">ByLocation</string>
+    <string name="text_save">บันทึก</string>
+    <string name="logout">Logout</string>
+</resources>

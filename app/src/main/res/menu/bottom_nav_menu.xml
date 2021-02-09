@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_number"
+        android:icon="@drawable/ic_baseline_filter_1_24"
+        android:title="@string/text_number_menu" />
+
+    <item
+        android:id="@+id/navigation_name"
+        android:icon="@drawable/ic_baseline_person_search_24"
+        android:title="@string/text_name_menu" />
+
+    <item
+        android:id="@+id/navigation_location"
+        android:icon="@drawable/ic_baseline_location_on_24"
+        android:title="@string/text_location_menu" />
+
+    <item
+        android:id="@+id/navigation_Spare"
+        android:icon="@drawable/ic_baseline_storage_24"
+        android:title="@string/text_spare_menu"
+        />
+
+</menu>
