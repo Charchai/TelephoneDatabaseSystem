@@ -18,40 +18,69 @@ class Register : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        mLoginSystemConnection = FirebaseAuth.getInstance()
-        mBtnRegister = findViewById(R.id.btn_register_register)
-        mInputUsername = findViewById(R.id.input_email_register)
-        mInputPassword = findViewById(R.id.input_password_register)
+        mLoginSystemConnection = FirebaseAuth.getInstance() //สร้างการเชื่อมต่อกับ login-firebase-system
+        createViewConnection()
     }
     override fun onResume() {
         super.onResume()
 
         mBtnRegister.setOnClickListener {
-            val textUsername = mInputUsername.text.toString().trim()
-            val textPassword = mInputPassword.text.toString().trim()
-            if (textUsername.isEmpty()){
-                Toast.makeText(this,"กรุณาป้อน Email", Toast.LENGTH_LONG).show()
+            if (!checkEmptyText()){
                 return@setOnClickListener
             }
-            if (textPassword.isEmpty()){
-                Toast.makeText(this,"กรุณาป้อน Password", Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
-            mLoginSystemConnection!!.createUserWithEmailAndPassword(textUsername,textPassword).addOnCompleteListener{
-                if (!it.isSuccessful){
-                    if (textPassword.length <= 8){
-                        mInputPassword.error = ".ใส่รหัสผ่านมากกว่า 8 ตัวอักษร"
-                    }else{
-                        Toast.makeText(this,"Login ไม่สำเร็จ เนื่องจาก :"+it.exception!!.message, Toast.LENGTH_LONG).show()
-                    }
-                    mInputUsername.setText("")
-                    mInputPassword.setText("")
+            registerAndCheck() //ถ้าสมัครสำเร็จ จะย้ายไปหน้า main
+        }
+    }
+    private fun createViewConnection(){
+        mBtnRegister = findViewById(R.id.btn_register_register)
+        mInputUsername = findViewById(R.id.input_email_register)
+        mInputPassword = findViewById(R.id.input_password_register)
+    }
+    private fun showText(text: String){
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show()
+    }
+    private fun checkEmptyText(): Boolean{
+        val textUsername = mInputUsername.text.toString().trim()
+        val textPassword = mInputPassword.text.toString().trim()
+        val textWhenNotFoundEmail = resources.getString(R.string.text_when_not_found_email)
+        val textWhenNotFoundPassword = resources.getString(R.string.text_when_not_found_password)
+        if (textUsername.isEmpty()){
+            showText(textWhenNotFoundEmail)
+            return false
+        }
+        if (textPassword.isEmpty()){
+            showText(textWhenNotFoundPassword)
+            return false
+        }
+        return true
+    }
+    private fun moveToMainActivity(){
+        startActivity(Intent(this,MainActivity::class.java))
+    }
+    private fun registerAndCheck(){
+        val textUsername = mInputUsername.text.toString().trim()
+        val textPassword = mInputPassword.text.toString().trim()
+        val textWhenRegisterFailedBecauseNumberOfPassword = resources.getString(R.string.text_when_register_failed_because_number_of_password)
+        val textWhenRegisterFailedBecauseOther = resources.getString(R.string.text_when_register_failed_because_other)
+        val textWhenRegisterSuccess = resources.getString(R.string.text_when_register_success)
+        mLoginSystemConnection!!.createUserWithEmailAndPassword(textUsername,textPassword).addOnCompleteListener{
+            if (!it.isSuccessful){
+                if (textPassword.length <= 8){
+                    mInputPassword.error = textWhenRegisterFailedBecauseNumberOfPassword
                 }else{
-                    Toast.makeText(this,"Login สำเร็จแล้ว",Toast.LENGTH_LONG).show()
-                    startActivity(Intent(this,MainActivity::class.java))
-                    finish()
+                    //แสดงสาเหตุข้อผิดพลาดจากระบบ
+                    Toast.makeText(this,textWhenRegisterFailedBecauseOther+it.exception!!.message, Toast.LENGTH_LONG).show()
                 }
+                makeInputIsEmpty()
+            }else{
+                showText(textWhenRegisterSuccess)
+                moveToMainActivity()
+                finish()
             }
         }
+    }
+    private fun makeInputIsEmpty(){
+        mInputUsername.setText("")
+        mInputPassword.setText("")
     }
 }

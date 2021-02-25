@@ -2,7 +2,6 @@ package program.application.mobileapp.telephonedatabasesystem
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -17,28 +16,48 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        mLoginSystemConnection = FirebaseAuth.getInstance()
-        if (mLoginSystemConnection!!.currentUser == null){
-            startActivity(Intent(applicationContext, Login::class.java))
-            finish()
-        }
-
-        mBtnSearch = findViewById(R.id.text_search_main)
-        mBtnAddData = findViewById(R.id.text_adddata_main)
-        mBtnLogout = findViewById(R.id.btn_logout_main)
-
+        checkLoginStatus() //ถ้าไม่มีการ login จะย้ายไปหน้า login
+        createViewConnection()
     }
     override fun onResume() {
         super.onResume()
 
-        mBtnLogout.setOnClickListener {
-            mLoginSystemConnection!!.signOut()
-            Toast.makeText(this,"Logout ออกจากระบบแล้ว", Toast.LENGTH_LONG).show()
-            startActivity(Intent(this,Login::class.java))
+        mBtnLogout.setOnClickListener { logout() }
+        mBtnSearch.setOnClickListener { moveToSearchHost() }
+        mBtnAddData.setOnClickListener { moveToAddData() }
+    }
+    private fun checkLoginStatus(){
+        mLoginSystemConnection = FirebaseAuth.getInstance()
+        if (mLoginSystemConnection!!.currentUser == null){ //ถ้าไม่มีข้อมูลการ login
+            moveToLogin()
             finish()
         }
-        mBtnSearch.setOnClickListener { startActivity(Intent(applicationContext, SearchHost::class.java)) }
-        mBtnAddData.setOnClickListener { startActivity(Intent(applicationContext, AddData::class.java)) }
+    }
+    private fun createViewConnection(){
+        mBtnSearch = findViewById(R.id.text_search_main)
+        mBtnAddData = findViewById(R.id.text_adddata_main)
+        mBtnLogout = findViewById(R.id.btn_logout_main)
+    }
+    private fun logout(){
+        mLoginSystemConnection!!.signOut()
+        showTextWhenLogout()
+        moveToLogin()
+        finish()
+    }
+    private fun moveToSearchHost(){
+        startActivity(Intent(applicationContext, SearchHost::class.java))
+    }
+    private fun moveToAddData(){
+        startActivity(Intent(applicationContext, AddData::class.java))
+    }
+    private fun moveToLogin(){
+        startActivity(Intent(this, Login::class.java))
+    }
+    private fun showTextWhenLogout(){
+        val textWhenLogout = resources.getString(R.string.text_when_logout)
+        showText(textWhenLogout)
+    }
+    private fun showText(text: String){
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show()
     }
 }

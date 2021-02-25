@@ -1,12 +1,12 @@
 package program.application.mobileapp.telephonedatabasesystem.spare
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,36 +16,28 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import program.application.mobileapp.telephonedatabasesystem.R
-import program.application.mobileapp.telephonedatabasesystem.number.SearchByNumber
 
 class Spare : Fragment() {
-//
-//    companion object {
-//        fun newInstance() = Spare()
-//    }
-
-//    private lateinit var viewModel: SpareViewModel
     private var mLoginSystemConnection : FirebaseAuth? = null
     private val mFirebaseDatabaseConnection = FirebaseDatabase.getInstance()
-    private lateinit var mUserData : String
+    private lateinit var mBarnch : String
     private lateinit var mRcv : RecyclerView
-
 
     override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.spare_fragment, container, false)
 
         mLoginSystemConnection = FirebaseAuth.getInstance()
-        mUserData = mLoginSystemConnection!!.currentUser?.uid.toString()
+        mBarnch = resources.getString(R.string.branch)
         mRcv = root.findViewById(R.id.rcv_empty)
         mRcv.layoutManager = LinearLayoutManager(activity)
         mRcv.addItemDecoration(DividerItemDecoration(activity,0))
-        val refSearchEmptyNumberDB = mFirebaseDatabaseConnection.getReference(mUserData).child("searchNameByPhoneNumber").orderByValue().equalTo("Empty")
+        val refSearchEmptyNumberDB = mFirebaseDatabaseConnection.getReference(mBarnch).orderByChild("nameForSearch").equalTo("Empty")
         refSearchEmptyNumberDB.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 val getData = snapshot.children
                 val arrayData2 = mutableListOf<KeepDataFromSnapshot2>()
                 for ( data in getData){
-                    val receiveEmpty = data.toString().substringBefore(",").substringAfter("key =").trim()
+                    val receiveEmpty = data.toString().substringAfter("phonenumberForName=").substringBefore(",").substringBefore("}").trim()
                     arrayData2.add(KeepDataFromSnapshot2(receiveEmpty))
                 }
                 mRcv.adapter = AdapterForRCV(arrayData2)
@@ -53,7 +45,7 @@ class Spare : Fragment() {
 
             }
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                showTextWhenErrorFromDataSnapshot(resources.getString(R.string.error_from_datasnapshot)+error.message)
             }
         })
 
@@ -73,15 +65,10 @@ class Spare : Fragment() {
         val showEmpty : TextView = itemView.findViewById(R.id.show_empty)
     }
     class KeepDataFromSnapshot2(val empty: String)
-    override fun onResume() {
-        super.onResume()
 
+    private fun showTextWhenErrorFromDataSnapshot(message: String){
+        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
     }
-//    override fun onActivityCreated(savedInstanceState: Bundle?) {
-//        super.onActivityCreated(savedInstanceState)
-////        val viewModel = ViewModelProvider(this).get(SpareViewModel::class.java)
-//        // TODO: Use the ViewModel
-//    }
 
 
 }

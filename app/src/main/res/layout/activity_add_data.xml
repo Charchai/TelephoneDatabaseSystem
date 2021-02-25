@@ -42,14 +42,14 @@
                 android:textSize="20sp"
                 android:textColor="@color/font"
                 android:layout_marginTop="15dp"
-                android:text="เพิ่มชื่อหรือตำแหน่งตู้โทรศัพท์"/>
+                android:text="@string/addData_Header1"/>
             <EditText
                 android:id="@+id/input_location_adddata"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:ems="10"
-                android:hint="เพิ่มชื่อตู้"
+                android:hint="@string/hint_addLocation"
                 android:importantForAutofill="no"
                 android:inputType="textPersonName"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -92,7 +92,7 @@
                 android:layout_marginTop="15dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:text="เพิ่มชื่อผู้ใช้งาน"
+                android:text="@string/addData_header2"
                 android:textColor="@color/font"
                 android:textSize="20sp"
                 android:id="@+id/text_addName"/>
@@ -105,9 +105,10 @@
                 android:layout_marginTop="10dp"
                 android:ems="10"
                 android:inputType="phone"
-                android:hint="เพิ่มหมายเลข"
+                android:hint="@string/hint_spare_number"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_addName" />
+                app:layout_constraintTop_toBottomOf="@id/text_addName"
+                android:importantForAutofill="no" />
 
             <EditText
                 android:id="@+id/input_name_adddata"
@@ -116,12 +117,13 @@
                 android:layout_marginTop="10dp"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:hint="ชื่อ ถ้าใส่ * หมายถึง spare"
+                android:hint="@string/hint_spare_name"
                 app:layout_constraintStart_toStartOf="@id/input_phone_adddata"
                 app:layout_constraintTop_toBottomOf="@id/input_phone_adddata"
                 tools:layout_editor_absoluteX="99dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginBottom="15dp"/>
+                android:layout_marginBottom="15dp"
+                android:importantForAutofill="no" />
 
             <Button
                 android:id="@+id/btn_save_name_adddata"
@@ -155,7 +157,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="เพิ่มข้อมูลหมายเลข"
+                android:text="@string/addData_header3"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -163,26 +165,36 @@
                 android:textSize="20sp"
                 android:textColor="@color/font"
                 android:id="@+id/text_addData"/>
+            <Spinner
+                android:id="@+id/spinner_location_addbox"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_addData" />
+
 
             <Spinner
                 android:id="@+id/spinner_location_adddata"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_addData" />
+                app:layout_constraintTop_toBottomOf="@id/spinner_location_addbox" />
 
             <EditText
                 android:id="@+id/input_row_adddata"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="12dp"
                 android:ems="10"
-                android:hint="แถว"
+                android:hint="@string/hint_row"
                 android:inputType="number"
                 app:layout_constraintStart_toStartOf="@id/spinner_location_adddata"
-                app:layout_constraintTop_toBottomOf="@id/spinner_location_adddata" />
+                app:layout_constraintTop_toBottomOf="@id/spinner_location_adddata"
+                android:importantForAutofill="no" />
 
             <EditText
                 android:id="@+id/input_colomn_adddata"
@@ -190,10 +202,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:ems="10"
-                android:hint="หมุด"
+                android:hint="@string/hint_column"
                 android:inputType="number"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/input_row_adddata" />
+                app:layout_constraintTop_toTopOf="@id/input_row_adddata"
+                android:importantForAutofill="no" />
 
             <EditText
                 android:id="@+id/input_phone_position_adddata"
@@ -202,47 +215,36 @@
                 android:layout_marginTop="10dp"
                 android:ems="10"
                 android:inputType="phone"
-                android:hint="หมายเลข"
+                android:hint="@string/hint_number"
                 app:layout_constraintStart_toStartOf="@id/input_row_adddata"
-                app:layout_constraintTop_toBottomOf="@id/input_row_adddata" />
-
-            <EditText
-                android:id="@+id/input_otherdata_adddata"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:hint="ข้อมูลเพิ่มเติม"
-                app:layout_constraintStart_toStartOf="@id/input_phone_position_adddata"
-                app:layout_constraintTop_toBottomOf="@id/input_phone_position_adddata" />
+                app:layout_constraintTop_toBottomOf="@id/input_row_adddata"
+                android:importantForAutofill="no" />
 
             <Button
                 android:id="@+id/btn_save_position_adddata"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:text="@string/text_save"
                 app:layout_constraintBottom_toBottomOf="parent"
-
-                android:layout_marginBottom="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/input_otherdata_adddata"
-                app:layout_constraintTop_toBottomOf="@id/input_otherdata_adddata" />
+                app:layout_constraintStart_toStartOf="@+id/input_phone_position_adddata"
+                app:layout_constraintTop_toBottomOf="@+id/input_phone_position_adddata" />
 
             <Button
                 android:id="@+id/btn_deleteLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ลบชื่อตู้"
+                android:text="@string/text_daleteLocation"
                 android:layout_marginEnd="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="@+id/spinner_location_adddata" />
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ลบข้อมูล"
+                android:text="@string/text_delete"
                 android:id="@+id/btn_deletePosition"
                 app:layout_constraintBottom_toBottomOf="@id/input_phone_position_adddata"
                 app:layout_constraintEnd_toEndOf="@id/btn_deleteLocation"/>

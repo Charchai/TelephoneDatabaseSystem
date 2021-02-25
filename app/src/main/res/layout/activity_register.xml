@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="108dp"
-        android:text="Register"
+        android:text="@string/register"
         android:textSize="50sp"
         android:textColor="@color/font"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:background="@color/backbroad"
             android:id="@+id/input_email_register"
-            android:hint="E-mail"
+            android:hint="@string/e_mail"
             android:inputType="textEmailAddress" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:background="@color/backbroad"
             android:id="@+id/input_password_register"
-            android:hint="Password"
+            android:hint="@string/password"
             android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -68,7 +68,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="สมัครสมาชิก"
+        android:text="@string/register_thai"
         app:layout_constraintEnd_toEndOf="@+id/passwordInput2"
         app:layout_constraintStart_toStartOf="@+id/passwordInput2"
         app:layout_constraintTop_toBottomOf="@+id/passwordInput2" />

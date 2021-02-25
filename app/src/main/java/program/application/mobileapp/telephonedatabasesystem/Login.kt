@@ -19,40 +19,69 @@ class Login : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        mLoginSystemConnection = FirebaseAuth.getInstance()
+        mLoginSystemConnection = FirebaseAuth.getInstance() //สร้างการเชื่อมต่อกับ login-firebase-system
+        createViewConnection()
+    }
+    override fun onResume() {
+        super.onResume()
+
+        mBtnRegister.setOnClickListener { moveToRegister() }
+        mBtnLogin.setOnClickListener {
+            if (!checkEmptyText()){
+                return@setOnClickListener
+            }
+            loginAndShowResult() //ถ้า login สำเร็จ จะย้ายไปหน้า main
+        }
+    }
+    private fun createViewConnection(){
         mBtnRegister = findViewById(R.id.btn_register_login)
         mBtnLogin = findViewById(R.id.btn_login_login)
         mInputPassword = findViewById(R.id.input_password_login)
         mInputUsername = findViewById(R.id.input_email_login)
     }
-    override fun onResume() {
-        super.onResume()
-
-        mBtnRegister.setOnClickListener { startActivity(Intent(applicationContext, Register::class.java)) }
-        mBtnLogin.setOnClickListener {
-            val textUsername = mInputUsername.text.toString().trim()
-            val textPassword = mInputPassword.text.toString().trim()
-            if (textUsername.isEmpty()){
-                Toast.makeText(this,"กรุณาป้อน Email", Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
-            if (textPassword.isEmpty()){
-                Toast.makeText(this,"กรุณาป้อน Password",Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
-            mLoginSystemConnection!!.signInWithEmailAndPassword( textUsername , textPassword ).addOnCompleteListener {
-                if (!it.isSuccessful){
-                    if (textPassword.length <= 8){
-                        mInputPassword.error = ".ใส่รหัสผ่านมากกว่า 8 ตัวอักษร"
-                    }else{
-                        Toast.makeText(this,"Login ไม่สำเร็จ เนื่องจาก :"+it.exception!!.message, Toast.LENGTH_LONG).show()
-                    }
+    private fun moveToRegister(){
+        startActivity(Intent(applicationContext, Register::class.java))
+    }
+    private fun checkEmptyText(): Boolean{
+        val textUsername = mInputUsername.text.toString().trim()
+        val textPassword = mInputPassword.text.toString().trim()
+        val textWhenNotFoundEmail = resources.getString(R.string.text_when_not_found_email)
+        val textWhenNotFoundPassword = resources.getString(R.string.text_when_not_found_password)
+        if (textUsername.isEmpty()){
+            showText(textWhenNotFoundEmail)
+            return false
+        }
+        if (textPassword.isEmpty()){
+            showText(textWhenNotFoundPassword)
+            return false
+        }
+        return true
+    }
+    private fun loginAndShowResult(){
+        val textUsername = mInputUsername.text.toString().trim()
+        val textPassword = mInputPassword.text.toString().trim()
+        val textWhenLoginFailedBecauseNumberOfPassword = resources.getString(R.string.text_when_login_failed_because_number_of_password)
+        val textWhenLoginFailedBecauseOther = resources.getString(R.string.text_when_login_failed_because_other)
+        val textWhenLoginSuccess = resources.getString(R.string.text_when_login_success)
+        mLoginSystemConnection!!.signInWithEmailAndPassword( textUsername , textPassword ).addOnCompleteListener {
+            if (!it.isSuccessful){
+                if (textPassword.length <= 8){
+                    mInputPassword.error = textWhenLoginFailedBecauseNumberOfPassword
                 }else{
-                    Toast.makeText(this,"Login สำเร็จแล้ว",Toast.LENGTH_LONG).show()
-                    startActivity(Intent(this,MainActivity::class.java))
-                    finish()
+                    //แสดงสาเหตุข้อผิดพลาดจากระบบ
+                    Toast.makeText(this,textWhenLoginFailedBecauseOther+it.exception!!.message, Toast.LENGTH_LONG).show()
                 }
+            }else{
+                showText(textWhenLoginSuccess)
+                moveToMainActivity()
+                finish()
             }
         }
+    }
+    private fun showText(text: String){
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show()
+    }
+    private fun moveToMainActivity(){
+        startActivity(Intent(this,MainActivity::class.java))
     }
 }

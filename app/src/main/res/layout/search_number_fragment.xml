@@ -17,7 +17,7 @@
         android:textSize="20sp"
         android:textColor="@color/font"
         android:layout_marginTop="15dp"
-        android:text="ค้นหาข้อมูลด้วยหมายเลข"/>
+        android:text="@string/number_header1"/>
 
 
     <EditText
@@ -28,7 +28,7 @@
         android:inputType="phone"
         android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
-        android:hint="หมายเลข"
+        android:hint="@string/nunmer_hint_number"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_searchByNumber"
         android:importantForAutofill="no" />
@@ -37,7 +37,7 @@
         android:id="@+id/btn_search_number_fragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ค้นหา"
+        android:text="@string/text_search_main"
         android:layout_marginEnd="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/input_phone_number_fragment"
         app:layout_constraintEnd_toEndOf="parent" />
